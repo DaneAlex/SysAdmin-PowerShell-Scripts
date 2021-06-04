@@ -1,2 +1,2 @@
 # SysAdmin-PowerShell-Scripts
-Some scripts I've used in my SysAdmin Role
+Scripts I've used in my time as a SysAdmin, or as part of the blog at onsb.co. 
