@@ -9,7 +9,10 @@ $Window.Title = "PoSH - TUI Example"
 [Terminal.Gui.Application]::Top.Add($Window)
 
 # FILE MENU
-$FileMenuItem = [Terminal.Gui.MenuItem]::new("Exit", "", { [Terminal.Gui.Application]::Shutdown() })
+$FileMenuItem = [Terminal.Gui.MenuItem]::new("Exit", "", { 
+  [Terminal.Gui.Application]::Shutdown() 
+  Exit(0)
+})
 $FileMenuBarItem = [Terminal.Gui.MenuBarItem]::new("File", @($FileMenuItem))
 
 # HELP MENU
