@@ -1,7 +1,7 @@
 ##############################################################################
 #.SYNOPSIS
 # Add SQL Databases to An Availability Group
-# This should be run on the current primary server in your AAG. 
+# This should be run on the current primary server in your AG. 
 #
 #.DESCRIPTION
 # This script will iterate over all databases on the local server
@@ -67,7 +67,7 @@ foreach($db in $dbs){
     if($db.AvailabilityGroupName -ne "" -and $databasesToIgnore -contains $db.Name){ 
 
         Write-Host "$(Get-Date -format g) - INFO - $($db.Name) - Skipping because it is either in the ignore list, or already in an AG."
-        continue 
+        return 
 
     }
 
@@ -93,7 +93,7 @@ foreach($db in $dbs){
 
             # Write an error if change fails, and skip to next database. 
             Write-Host "$(Get-Date -format g) - ERROR - $($db.Name) - Failed to set databases to Full Recovery Model."
-            continue
+            return
 
         }
 
@@ -116,7 +116,7 @@ foreach($db in $dbs){
 
             # Write an error if backup fails, and skip to next database. 
             Write-Host "$(Get-Date -format g) - ERROR - $($db.Name) - Failed attemping to take a backup."
-            continue
+            return
 
         }
     }
@@ -140,7 +140,7 @@ foreach($db in $dbs){
 
         # Write an error if it failed to add to AG and go to next database.  
         Write-Host "$(Get-Date -format g) - ERROR - $($db.Name) - $($primaryNode): Failed to add to AG"
-        continue
+        return
 
     }
 
