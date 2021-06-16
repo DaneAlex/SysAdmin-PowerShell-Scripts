@@ -64,12 +64,13 @@ foreach($db in $dbs){
     # AG and Ignore Checks
     #################################
     
-    if($db.AvailabilityGroupName -ne "" -and $databasesToIgnore -contains $db.Name){ 
+    if($db.AvailabilityGroupName -ne "" -or $databasesToIgnore -contains $db.Name){ 
 
         Write-Host "$(Get-Date -format g) - INFO - $($db.Name) - Skipping because it is either in the ignore list, or already in an AG."
-        return 
+        continue 
 
     }
+
 
 
     Write-Host "$(Get-Date -format g) - INFO - $($db.Name) - Is not currently in the AG. "
@@ -93,7 +94,8 @@ foreach($db in $dbs){
 
             # Write an error if change fails, and skip to next database. 
             Write-Host "$(Get-Date -format g) - ERROR - $($db.Name) - Failed to set databases to Full Recovery Model."
-            return
+            continue 
+
 
         }
 
@@ -116,7 +118,8 @@ foreach($db in $dbs){
 
             # Write an error if backup fails, and skip to next database. 
             Write-Host "$(Get-Date -format g) - ERROR - $($db.Name) - Failed attemping to take a backup."
-            return
+            continue 
+
 
         }
     }
@@ -140,7 +143,7 @@ foreach($db in $dbs){
 
         # Write an error if it failed to add to AG and go to next database.  
         Write-Host "$(Get-Date -format g) - ERROR - $($db.Name) - $($primaryNode): Failed to add to AG"
-        return
+        continue
 
     }
 
