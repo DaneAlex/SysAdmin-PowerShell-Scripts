@@ -29,6 +29,6 @@ Remove-Item ".\*\AppData\Local\Microsoft\Windows\INetCache\*" -recurse -force
 
 $chromeInstalled = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo
 
-if ($chromeInstalled.FileName -eq $null) {
+if ($null -ne $chromeInstalled.FileName) {
   Remove-Item ".\*\AppData\Local\Google\Chrome\User Data\Default\Cache\*" -recurse -force
 }
