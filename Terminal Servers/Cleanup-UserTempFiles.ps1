@@ -1,9 +1,13 @@
 ##############################################################################
 #.SYNOPSIS
 # Clean Temp File folders for all users. 
+# Original Idea of using the set-Location to C:\Users comes from Dr Scripto: 
+# https://devblogs.microsoft.com/scripting/weekend-scripter-use-powershell-to-clean-out-temp-folders/
+# I added the lines for checking for Chrome being installed. I plan to expand
+# on this more, later on. 
 #
 #.DESCRIPTION
-# This script will run against user tmeporary and temporary internet files
+# This script will run against user temporary and temporary internet files
 # and attempt to remove any potential files. 
 #
 # If you have web applications that may rely on on temp file folders, you
