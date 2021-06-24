@@ -1,3 +1,5 @@
+# SOME CODE REFERENCED FROM Mike Fal - http://www.mikefal.net/2015/12/09/moving-your-master-database-with-powershell/
+
 ### LOAD NECESSARY MODULES ###
 ##############################
 
@@ -36,7 +38,7 @@ $('mast', 'model','MSDB') | ForEach-Object {Move-Item -Path $($defaultSystemData
 # Update Startup Parameters for Master DB and Log
 
 $wmisvc = $(New-Object Microsoft.SqlServer.Management.Smo.Wmi.ManagedComputer 'localhost').Services | where {$_.name -eq "MSSQLSERVER"}
-$wmisvc.StartupParameters= "-d$desiredSystemDatabasePath\master.mdf;-e$desiredSystemDatabasePath\ERRORLOG;-l$desiredSystemDatabaseLogPath\mastlog.ldf"
+$wmisvc.StartupParameters= "-d$desiredSystemDatabasePath\master.mdf;-e$desiredSystemDatabaseLogPath\ERRORLOG;-l$desiredSystemDatabaseLogPath\mastlog.ldf"
 $wmisvc.Alter()
 
 Start-Service -Name MSSQLSERVER,SQLSERVERAGENT -Verbose
