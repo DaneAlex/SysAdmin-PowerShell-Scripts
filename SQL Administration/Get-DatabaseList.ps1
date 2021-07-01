@@ -34,7 +34,7 @@ Function Get-DatabaseList {
     $dbs = $null
 
     foreach($server in $ServerList){
-        Write-Host "Getting dbs from $server"
+        Write-Host "Getting databases from $server"
         [System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.SMO') | Out-Null
         $s = New-Object ('Microsoft.Sqlserver.management.Smo.Server') $server
         $dbs += $s.Databases
