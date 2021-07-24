@@ -50,7 +50,7 @@ Function Get-MFAStatusForUsers{
     )
 
     $MFAusers = @()
-    foreach($user in $OwnerContributors){
+    foreach($user in $UserList){
         if($null -eq $user){
             $user = Get-MsolUser -UserPrincipalName $user | Select-Object DisplayName,UserPrincipalName,@{N="MFA Status"; E={ if( $_.StrongAuthenticationMethods.IsDefault -eq $true) {($_.StrongAuthenticationMethods | Where IsDefault -eq $True).MethodType} else { "Disabled"}}}
             $MFAusers += $user
